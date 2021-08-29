@@ -1,0 +1,75 @@
+<html><head><title>Code was never writen</title></head><body><div id='out1'></div><div id='out2'></div><script>
+
+var initComments = ['tim 3 likes','vasya 4 ','ricardo 54 likes','masha 13 likes'];
+
+window.onload = function(){
+
+	let p1=performance.now();
+	let res1=getBestComments(initComments).join(', ');
+	let p2=performance.now();
+	let res2= getBestCommentsSimple(initComments).join(', ');
+	let p3=performance.now();
+	
+	out1.innerText ='Time for complex realization: \t'+ (p2-p1) + ' | result = '+res1;
+	out2.innerText ='Time for simple realization: \t'+ (p3-p2) + ' |  result: '+res2;
+}
+
+// You can write this code   ----------------------------------------
+
+function isGoodComment(i)
+{
+    //r - is good result 
+    let r = false;
+    if(i>4){//if likes more than 4 then comment is good
+        r = true;
+    }
+    return r;
+}
+
+function getCommentLikesCount(c)
+{
+  //r is result for comment
+  let r = 0;
+  //m is multipler
+  let m=1;
+  console.dir(c)
+  //c - is comment with text
+  for(let i=c.length;i>0;i--){
+    if(c[i]>'0' && c[i]<'9')
+    {
+      r=r+c[i]*m;
+      m=m*10;
+    }
+  }
+  return r;
+}
+
+function getBestComments(comments)
+{
+//iterator for comments
+let i;
+//for result
+let r=[]
+for(i=0;i<=3;i++){
+  let c = comments[i];
+  //how many likes in the comment
+  let l = getCommentLikesCount(c);
+  console.log(l)
+  //is like is good or not
+  let g = isGoodComment(l)
+  if(g===true)
+  {
+    console.log(c)
+	r.push(c)
+  }
+}
+return r;
+}
+
+// Or you can write this code ----------------------------------------
+function getBestCommentsSimple(comments)
+{
+	return initComments.filter((c)=>/\d+/.exec(c)[0]>4)
+}
+
+</script></body></html>
