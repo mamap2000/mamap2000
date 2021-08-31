@@ -1,29 +1,44 @@
-<html><head><title>Code was never writen</title></head><body><div id='out1'></div><div id='out2'></div><script>
+<html><head><title>LEAFA Code was never writen</title></head><body><div id='out1'></div><div id='out2'></div><script>
+	
+//LEAFA - low encryption affects fast adoption
+//This example is about principle "The Best Code I Have Ever Written Is The Code I Never Wrote"
+//Two samples of code doing the same: search for a best commentary:
 
-var initComments = ['tim 3 likes','vasya 4 ','ricardo 54 likes','masha 13 likes'];
-
+//Initialization and calculate perfomance of two realisations:
+var initComments = ['dadario 3 likes','cina 4 ','ricardo 54 likes','ada 13 likes'];
 window.onload = function(){
-
+	
+	let likesToBest = 4;
+	
 	let p1=performance.now();
-	let res1=getBestComments(initComments).join(', ');
+	let res1=getBestComments(initComments, likesToBest).join(', ');
 	let p2=performance.now();
-	let res2= getBestCommentsSimple(initComments).join(', ');
+	let res2= getBestCommentsSimple(initComments, likesToBest).join(', ');
 	let p3=performance.now();
 	
-	out1.innerText ='Time for complex realization: \t'+ (p2-p1) + ' | result = '+res1;
-	out2.innerText ='Time for simple realization: \t'+ (p3-p2) + ' |  result: '+res2;
+	out1.innerText ='Time for complex realization: \n'+ (p2-p1) + ' | result = '+res1;
+	out2.innerText ='Time for simple realization: \n'+ (p3-p2) + ' |  result: '+res2;
 }
 
-// You can write this code   ----------------------------------------
-
-function isGoodComment(i)
+// You can write all this code:   ----------------------------------------
+function getBestComments(comments, likesToBest)
 {
-    //r - is good result 
-    let r = false;
-    if(i>4){//if likes more than 4 then comment is good
-        r = true;
-    }
-    return r;
+//iterator for comments
+let i;
+//for result
+let r=[]
+for(i=0;i<comments.length;i++){
+  let c = comments[i];
+  //how many likes in the comment
+  let l = getCommentLikesCount(c);
+  //is like is good or not
+  let g = isGoodComment(l,likesToBest)
+  if(g===true)
+  {
+     r.push(c)
+  }
+}
+return r;
 }
 
 function getCommentLikesCount(c)
@@ -32,7 +47,6 @@ function getCommentLikesCount(c)
   let r = 0;
   //m is multipler
   let m=1;
-  console.dir(c)
   //c - is comment with text
   for(let i=c.length;i>0;i--){
     if(c[i]>'0' && c[i]<'9')
@@ -44,32 +58,21 @@ function getCommentLikesCount(c)
   return r;
 }
 
-function getBestComments(comments)
+function isGoodComment(i,likesToBest)
 {
-//iterator for comments
-let i;
-//for result
-let r=[]
-for(i=0;i<=3;i++){
-  let c = comments[i];
-  //how many likes in the comment
-  let l = getCommentLikesCount(c);
-  console.log(l)
-  //is like is good or not
-  let g = isGoodComment(l)
-  if(g===true)
-  {
-    console.log(c)
-	r.push(c)
-  }
-}
-return r;
+    //r - is good result 
+    let r = false;
+    //if likes more than <likesToBest> then comment is good
+    if(i>likesToBest){
+        r = true;
+    }
+    return r;
 }
 
-// Or you can write this code ----------------------------------------
-function getBestCommentsSimple(comments)
+// Or you can write just this code: ----------------------------------------
+function getBestCommentsSimple(comments, likesToBest)
 {
-	return initComments.filter((c)=>/\d+/.exec(c)[0]>4)
+    return initComments.filter((c)=>/\d+/.exec(c)[0]>likesToBest)
 }
 
 </script></body></html>
