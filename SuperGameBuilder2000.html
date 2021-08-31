@@ -1,0 +1,26 @@
+<html><head><title>SuperGameBuilder2000</title></head><body><script>
+
+var board = document.createElement('div')
+board.style = 'width:500px;height:500px;background-color:#0f0f;'
+board.classList.add()
+
+var ceils = [...Array(100).keys()].map(v => {
+    var ceilImg = document.createElement('img')
+    ceilImg.src = 'https://i.pinimg.com/originals/91/a0/8d/91a08d044e60610d9c2a61b3bddef164.jpg'
+    ceilImg.style = 'width:50px;height:50px;object-fit: none; object-position: -10px -10px;border:solid 1px #000f;margin:-2px;padding:1px;'
+    ceilImg.onmouseenter = (e) => {
+        ceilImg.style.opacity = 0.5
+    }
+    ceilImg.onmouseleave = (e) => {
+        ceilImg.style.opacity = 1
+    }
+    ceilImg.onclick = (e) => {
+        ceilImg.style['object-position'] = '-55px -197px'
+    }
+    return ceilImg;
+})
+
+ceils.forEach(v => board.appendChild(v))
+document.body.appendChild(board)
+
+</script></body></html>
